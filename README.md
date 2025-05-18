@@ -29,6 +29,7 @@ _**Culturally Aware:**_ Understands user preferences and restrictions
 - Flask-Login – User session management
 - Flask-SQLAlchemy – ORM for database handling
 - Google Generative AI (Gemini) – For NLP and multimodal intelligence
+- HTML/CSS  – Frontend (via Jinja2 templating)
  
 
 
