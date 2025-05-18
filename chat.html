@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Chat{% endblock %}
+{% block content %}
+    <h3>Ask your nutrition assistant:</h3>
+    <div id="chat-box" style="border:1px solid #ccc; padding:10px; height:300px; overflow-y:auto;"></div>
+
+    <form id="chat-form">
+        <input type="text" id="user-input" placeholder="Type your question..." style="width:70%;" required>
+        <button type="submit">Send</button>
+    </form>
+
+    <script>
+    document.getElementById("chat-form").addEventListener("submit", async function(e) {
+        e.preventDefault();
+        const userInput = document.getElementById("user-input").value;
+        const chatBox = document.getElementById("chat-box");
+        chatBox.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+
+        const response = await fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: userInput })
+        });
+
+        const data = await response.json();
+        chatBox.innerHTML += `<p><strong>AI:</strong> ${data.reply}</p>`;
+        document.getElementById("user-input").value = "";
+    });
+    </script>
+{% endblock %}

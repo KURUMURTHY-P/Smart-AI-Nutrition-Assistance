@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Successful</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+        .card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>🎉 Registration Successful!</h2>
+        <p>Thank you, <strong>{{ user.name }}</strong>, for registering with the Smartest AI Nutrition Assistant.</p>
+        <p>We're excited to help you with your goal: <em>{{ user.goal }}</em>.</p>
+        <p><a href="/">Click here</a> to start using the AI assistant!</p>
+    </div>
+</body>
+</html>

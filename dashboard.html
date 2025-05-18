@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+    <h2>Welcome, {{ user.name }}!</h2>
+    <p><strong>Goal:</strong> {{ user.goal }}</p>
+    <p><strong>Preferences:</strong> {{ user.preferences }}</p>
+    <p><strong>Allergies:</strong> {{ user.allergies }}</p>
+
+    <a href="/chat"><button>Chat with Nutrition AI</button></a>
+{% endblock %}

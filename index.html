@@ -1,0 +1,115 @@
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smartest AI Nutrition Assistant</title>
+    <style>
+        /* Basic styling for layout */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        #chat-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+        }
+        #preview {
+            display: none;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Form Section -->
+    <div class="section">
+        <h2>Analyze Your Meal</h2>
+        <form method="post" enctype="multipart/form-data">
+            <label for="prompt">Your Prompt:</label><br>
+            <textarea name="prompt" rows="4" cols="50" placeholder="E.g., Is this suitable for a diabetic diet?">{{ prompt }}</textarea><br><br>
+
+            <label for="image">Upload a Food Image (optional):</label><br>
+            <input type="file" name="image" accept="image/*" onchange="previewImage(event)"><br><br>
+
+            <!-- Preview before submit -->
+            <img id="preview" src="#" alt="Image Preview"><br><br>
+
+            <button type="submit">Analyze</button>
+        </form>
+
+        <!-- Display uploaded image after response -->
+        {% if image_data %}
+            <h4>Analyzed Image:</h4>
+            <img src="data:image/jpeg;base64,{{ image_data }}" width="300"><br><br>
+        {% endif %}
+
+        <!-- Assistant response after analysis -->
+        {% if response %}
+            <h3>Assistant Response:</h3>
+            <p>{{ response }}</p>
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <!-- Chatbot Interface -->
+    <div class="section">
+        <h2>Ask Your Nutrition Assistant</h2>
+        <div id="chat-box"></div>
+        
+        <form id="chat-form">
+            <input type="text" id="user-input" placeholder="Type your question..." style="width:70%;" required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <!-- JavaScript for image preview and chatbot -->
+    <script>
+        // Function to preview selected image
+        function previewImage(event) {
+            const preview = document.getElementById('preview');
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Chatbot functionality
+        document.getElementById("chat-form").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const userInput = document.getElementById("user-input").value;
+            const chatBox = document.getElementById("chat-box");
+
+            // Display user's message
+            chatBox.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+
+            // Send user's message to the server
+            const response = await fetch("/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: userInput })
+            });
+
+            const data = await response.json();
+
+            // Display AI's response
+            chatBox.innerHTML += `<p><strong>AI:</strong> ${data.reply}</p>`;
+            document.getElementById("user-input").value = "";
+
+            // Auto-scroll to bottom
+            chatBox.scrollTop = chatBox.scrollHeight;
+        });
+    </script>
+
+</body>
+</html>

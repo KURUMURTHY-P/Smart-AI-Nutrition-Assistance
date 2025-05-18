@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<h2>Create Your Profile</h2>
+<form method="POST" action="/register">
+
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="email" name="email" placeholder="Email" required><br>
+    <input type="password" name="password" placeholder="Password" style="width: 630px" required><br>
+    <input type="number" name="age" placeholder="Age"><br><br>
+
+    <label for="gender">Gender:</label><br>
+    <select name="gender" id="gender" style="width: 250px;">
+        <option value="" disabled selected>Select your gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+    </select><br><br>
+
+    <label for="health_goal">Select Your Health Goal:</label><br>
+    <select name="health_goal" id="health_goal" style="width: 250px;">
+        <option value="" disabled selected>Select your health goal</option>
+        <option value="manage_diabetes">Manage Diabetes</option>
+        <option value="heart_health">Improve Heart Health</option>
+        <option value="thyroid_support">Support Thyroid Health</option>
+        <option value="cholesterol_control">Reduce Cholesterol</option>
+        <option value="bp_control">Lower Blood Pressure</option>
+        <option value="pcos_support">Control PCOS/PCOD</option>
+        <option value="immunity_boost">Boost Immunity</option>
+        <option value="lose_weight">Lose Weight</option>
+        <option value="gain_weight">Gain Weight</option>
+        <option value="keto_diet">Keto Diet</option>
+        <option value="plant_based">Plant-Based Diet</option>
+        <option value="intermittent_fasting">Intermittent Fasting</option>
+    </select><br><br>
+
+    <label for="allergies">Select Your Food Allergies:</label><br>
+    <select name="allergies" id="allergies" multiple style="width: 250px; height: 100px;">
+        <option value="peanuts">Peanuts</option>
+        <option value="tree_nuts">Tree Nuts</option>
+        <option value="milk">Milk</option>
+        <option value="eggs">Eggs</option>
+        <option value="fish">Fish</option>
+        <option value="shellfish">Shellfish</option>
+        <option value="soy">Soy</option>
+        <option value="wheat">Wheat</option>
+        <option value="gluten">Gluten</option>
+        <option value="none">None</option>
+    </select><br><br>
+
+    <label for="food_preference">Select Your Food Preference:</label><br>
+    <select name="food_preference" id="food_preference" style="width: 250px;">
+        <option value="" disabled selected>Select your preference</option>
+        <option value="vegetarian">Vegetarian</option>
+        <option value="vegan">Vegan</option>
+        <option value="keto">Keto</option>
+        <option value="gluten_free">Gluten-Free</option>
+        <option value="dairy_free">Dairy-Free</option>
+        <option value="no_preference">No Preference</option>
+    </select><br><br>
+
+    <button type="submit">Register</button>
+</form>
+{% endblock %}
